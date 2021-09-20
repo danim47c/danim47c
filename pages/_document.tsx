@@ -1,10 +1,10 @@
 import Document, {
-  Html,
+  DocumentContext,
+  DocumentInitialProps,
   Head,
+  Html,
   Main,
   NextScript,
-  DocumentInitialProps,
-  DocumentContext,
 } from "next/document"
 
 class MyDocument extends Document {
@@ -25,6 +25,9 @@ class MyDocument extends Document {
             rel="stylesheet"
             media="all"
           />
+
+          <title>danim47c</title>
+          <link rel="shortcut icon" href="/icon.webp" />
         </Head>
         <body>
           <Main />
