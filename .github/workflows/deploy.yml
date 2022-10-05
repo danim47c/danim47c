@@ -48,7 +48,7 @@ jobs:
         
         - name: Set pull request stage
           if: contains(github.ref, 'pull')
-          run: ${{ format('node -e "process.stdout.write(\"{0}\".slice(10).slice(0, -6))" >> $GITHUB_ENV', toJSON(github.ref)) }}
+          run: ${{ format('node -e "process.stdout.write(\"{0}\".slice(10).slice(0, -6))" >> $GITHUB_ENV', github.ref) }}
 
         - name: Set prod stage
           if: github.ref_name == 'main'
