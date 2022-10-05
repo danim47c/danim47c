@@ -1,0 +1,26 @@
+{
+  "name": "danim47c",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "sst": "sst"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@serverless-stack/cli": "^1.15.8",
+    "@serverless-stack/core": "^1.15.8",
+    "@serverless-stack/resources": "^1.15.8",
+    "aws-cdk-lib": "2.39.1",
+    "chalk": "^5.0.1",
+    "constructs": "^10.1.122",
+    "eslint-config-custom": "workspace:*",
+    "fs-extra": "^10.1.0",
+    "prettier": "latest",
+    "turbo": "latest"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "packageManager": "pnpm@7.12.0"
+}

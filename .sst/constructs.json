@@ -1,0 +1,1 @@
+[{"id":"Web","addr":"c87f283c461708bd1fb52c482e4f2f517db181cccd","stack":"prod-danim47c-web","type":"StaticSite","data":{"distributionId":"${Token[TOKEN.381]}","customDomainUrl":"https://danim47c.dev"}}]

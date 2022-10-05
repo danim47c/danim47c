@@ -1,0 +1,14 @@
+{
+  "name": "eslint-config-custom",
+  "version": "0.0.0",
+  "main": "./eslintrc.js",
+  "dependencies": {
+    "@typescript-eslint/parser": "^5.39.0",
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-turbo": "latest"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}

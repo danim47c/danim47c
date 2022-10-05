@@ -1,0 +1,61 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - preview
+  pull_request:
+   
+env:
+  DOMAIN_NAME: danim47c.dev
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    env: 
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+    steps:
+        - uses: actions/checkout@v2
+          with:
+            fetch-depth: 2
+
+        - name: Cache pnpm
+          uses: actions/cache@v3
+          with:
+            path:
+              ./node_modules
+            key: danim47c-pnpm
+ 
+        - uses: pnpm/action-setup@v2.0.1
+          with:
+            version: 7
+ 
+        - uses: actions/setup-node@v2
+          with:
+            node-version: 16
+            cache: 'pnpm'
+
+        - name: Install dependencies
+          run: pnpm install
+        
+        - name: Set pull request stage
+          if: contains(github.ref, 'pull')
+          run: ${{ format('node -e "process.stdout.write({0}.slice(10).slice(0, -6))" >> $GITHUB_ENV', toJSON(github.ref)) }}
+
+        - name: Set prod stage
+          if: github.ref_name == 'main'
+          run: echo "STAGE=prod" >> $GITHUB_ENV
+
+        - name: Set preview stage
+          if: github.ref_name == 'preview'
+          run: echo "STAGE=preview" >> $GITHUB_ENV
+
+        - name: Turbo deploy ${{ env.STAGE }}
+          env:
+            DOMAIN_NAME: ${{ env.DOMAIN_NAME }}
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          run: pnpm turbo run deploy -- --stage ${{ env.STAGE }}
