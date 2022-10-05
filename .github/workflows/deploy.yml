@@ -6,6 +6,11 @@ on:
       - main
       - preview
   pull_request:
+    types:
+      - opened
+      - synchronize
+      - edited
+      - reopened
    
 env:
   DOMAIN_NAME: danim47c.dev
