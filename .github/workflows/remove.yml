@@ -40,7 +40,7 @@ jobs:
           run: pnpm install
         
         - name: Set stage
-          run: ${{ format('node -e "process.stdout.write(\"STAGE=\" + \"{0}\".slice(10).slice(0, -6))" >> $GITHUB_ENV', github.ref) }}
+          run: ${{ format('node -e "process.stdout.write(\"STAGE=pr-\" + \"{0}\".slice(10).slice(0, -6))" >> $GITHUB_ENV', github.ref) }}
 
         - name: Turbo deploy:remove ${{ env.STAGE }}
           env:
