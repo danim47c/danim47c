@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint . --fix --cache --ext .js,.jsx,.ts,.tsx,.astro",
-    "deploy": "pnpm run -w sst deploy web"
+    "deploy": "pnpm run -w sst deploy web",
+    "deploy:remove": "pnpm run -w sst remove web"
   },
   "dependencies": {
     "astro": "^1.4.4",
