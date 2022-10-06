@@ -5,10 +5,10 @@ on:
     outputs:
       stage:
         description: 'Stage to deploy'
-        type: string
+        value: ${{ steps.stage.outputs.stage }}
 
 jobs:
-  stage:
+  strategy:
     name: Get stage
     runs-on: ubuntu-latest
     outputs:
