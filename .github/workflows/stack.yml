@@ -9,6 +9,15 @@ on:
         description: 'Stack to deploy'
         type: string
         required: true
+    secrets:
+      TURBO_TOKEN:
+        required: true
+      TURBO_TEAM:
+        required: true
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
 
 concurrency:
   group: ${{ format('{0}-{1}', inputs.stage, inputs.stack) }}

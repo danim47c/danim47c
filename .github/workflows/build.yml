@@ -1,5 +1,10 @@
 on: 
-  workflow_call
+  workflow_call:
+    secrets:
+      TURBO_TOKEN:
+        required: true
+      TURBO_TEAM:
+        required: true
 
 jobs:
   build:
