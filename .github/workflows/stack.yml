@@ -56,9 +56,9 @@ jobs:
         - name: Install dependencies
           run: pnpm install
 
-        - name: Turbo deploy ${{ env.STAGE }}
+        - name: Turbo deploy ${{ inputs.stage }}
           env:
             DOMAIN_NAME: ${{ env.DOMAIN_NAME }}
             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          run: pnpm turbo run deploy -- --stage ${{ env.STAGE }} 
+          run: pnpm turbo run deploy -- --stage ${{ inputs.stage }} 
