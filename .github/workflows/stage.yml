@@ -1,12 +1,19 @@
 name: Get stage
 
 on: 
-  workflow_call
+  workflow_call:
+    outputs:
+      stage:
+        description: 'Stage to deploy'
+        required: true
+        type: string
 
 jobs:
   stage:
     name: Get stage
     runs-on: ubuntu-latest
+    outputs:
+      stage: ${{ env.STAGE }}
     steps:
       - name: Set pull request stage
         if: contains(github.ref, 'pull')
@@ -19,6 +26,3 @@ jobs:
       - name: Set preview stage
         if: github.ref_name == 'preview'
         run: echo "STAGE=preview" >> $GITHUB_ENV
-      
-      - name: Set stage output
-        run: echo "::set-output name=stage::${{ env.STAGE }}"
