@@ -30,7 +30,7 @@ jobs:
     strategy:
       matrix:
         stack: [web]
-    uses: ./.github/workflows/deploy/stage.yml
+    uses: ./.github/workflows/stack.yml
     with:
       stage: ${{ needs.stage.outputs.stage }}
       stack: ${{ matrix.stack }}
