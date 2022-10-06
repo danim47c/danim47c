@@ -20,7 +20,7 @@ jobs:
     uses: ./.github/workflows/build.yml
 
   stage:
-    uses: ./.github/workflows/utils/stage.yml
+    uses: ./.github/workflows/stage.yml
 
   deploy:
     name: Deploy
