@@ -9,13 +9,12 @@ on:
         description: 'Stack to deploy'
         type: string
         required: true
-      domain_name:
-        description: 'Domain name'
-        type: string
-        required: true
 
 concurrency:
   group: ${{ format('{0}-{1}', inputs.stage, inputs.stack) }}
+
+env:
+  DOMAIN_NAME: danim47c.dev
 
 jobs:
   build:

@@ -12,9 +12,6 @@ on:
       - edited
       - reopened
 
-env:
-  DOMAIN_NAME: danim47c.dev
-
 jobs:
   build:
     uses: ./.github/workflows/build.yml
@@ -34,4 +31,3 @@ jobs:
     with:
       stage: ${{ needs.stage.outputs.stage }}
       stack: ${{ matrix.stack }}
-      domain_name: ${{ env.DOMAIN_NAME }}
