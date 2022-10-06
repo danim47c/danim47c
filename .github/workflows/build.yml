@@ -1,0 +1,36 @@
+on: 
+  workflow_run
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    env: 
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+    steps:
+        - uses: actions/checkout@v2
+          with:
+            fetch-depth: 2
+
+        - name: Cache pnpm
+          uses: actions/cache@v3
+          with:
+            path:
+              ./node_modules
+            key: danim47c-pnpm
+ 
+        - uses: pnpm/action-setup@v2.0.1
+          with:
+            version: 7
+ 
+        - uses: actions/setup-node@v2
+          with:
+            node-version: 16
+            cache: 'pnpm'
+
+        - name: Install dependencies
+          run: pnpm install 
+
+        - name: Turbo build
+          run: pnpm turbo build
