@@ -18,12 +18,12 @@ jobs:
           with:
             fetch-depth: 2
 
-        - name: Cache pnpm
-          uses: actions/cache@v3
-          with:
-            path:
-              ./node_modules
-            key: danim47c-pnpm
+        # - name: Cache pnpm
+        #   uses: actions/cache@v3
+        #   with:
+        #     path:
+        #       ./node_modules
+        #     key: danim47c-pnpm
  
         - uses: pnpm/action-setup@v2.0.1
           with:
