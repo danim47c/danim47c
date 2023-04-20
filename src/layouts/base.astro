@@ -1,8 +1,6 @@
 ---
 import { inject } from '@vercel/analytics'
 
-// Inject vercel analytics
-inject()
 
 interface Props {
   title?: string
@@ -24,6 +22,9 @@ const headerLinks: HeaderLink[] = [
 
 <html lang="en">
   <script is:inline>
+    // Inject vercel analytics
+    inject()
+
     const offsetToMinize = 100
 
     let header
