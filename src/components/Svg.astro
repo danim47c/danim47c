@@ -9,6 +9,8 @@ console.log(`route.src`, route.src);
 
 const svg = await import(`../../${route.src}?raw`);
 
+console.log({route, svg})
+
 ---
 
 <Fragment set:html={svg.default} />
