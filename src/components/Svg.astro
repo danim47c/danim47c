@@ -1,16 +1,14 @@
 ---
-import { readFile } from "fs/promises";
-
 interface Props {
-  src: string
+  src: string;
 }
 
-const route = Astro.props
+const route = Astro.props;
 
-const svg = await readFile(route.src, "utf8")
+const svg = await import(`${route.src}?reaw`);
 ---
 
-<svg set:html={svg}/>
+<Fragment set:html={svg} />
 
 <style lang="scss">
   svg {
