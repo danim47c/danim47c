@@ -5,10 +5,13 @@ interface Props {
 
 const route = Astro.props;
 
-const svg = await import(`${route.src}?reaw`);
+console.log(`route.src`, route.src);
+
+const svg = await import(`../../${route.src}?raw`);
+
 ---
 
-<Fragment set:html={svg} />
+<Fragment set:html={svg.default} />
 
 <style lang="scss">
   svg {
