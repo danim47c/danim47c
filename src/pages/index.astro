@@ -1,13 +1,13 @@
 ---
-import Svg from "../components/Svg.astro"
-import Base from "../layouts/base.astro"
-import { groupList } from "../utils/group"
+import Svg from "../components/Svg.astro";
+import Base from "../layouts/base.astro";
+import { groupList } from "../utils/group";
 
 interface Link {
-  name: string
-  icon: string
-  url: string
-  color: string
+  name: string;
+  icon: string;
+  url: string;
+  color: string;
 }
 
 const links: Link[] = [
@@ -35,14 +35,14 @@ const links: Link[] = [
     url: "https://discordapp.com/users/495957564706521090",
     color: "#7085D3",
   },
-]
+];
 
-const groupedLinks = groupList(links, 2)
+const groupedLinks = groupList(links, 2);
 
 interface Stack {
-  name: string
-  icon: string
-  color: string
+  name: string;
+  icon: string;
+  color: string;
 }
 
 const stacks: Stack[] = [
@@ -68,9 +68,9 @@ const stacks: Stack[] = [
   { name: "DynamoDB", icon: "./assets/stacks/dynamodb.svg", color: "#2D71B8" },
   { name: "Vercel", icon: "./assets/stacks/vercel.svg", color: "#000" },
   { name: "AWS", icon: "./assets/stacks/aws.svg", color: "#FF9900" },
-]
+];
 
-const groupedStacks = groupList(stacks, 4)
+const groupedStacks = groupList(stacks, 4);
 ---
 
 <Base>
@@ -124,6 +124,15 @@ const groupedStacks = groupList(stacks, 4)
         }
       </div>
     </section>
+
+    <section class="grant">
+      <a
+        target="_blank"
+        rel="noreferrer"
+        href="https://www.tramitacastillayleon.jcyl.es/web/jcyl/binarios/853/306/IAPA_2884_Cartel_2024.pdf?blobheader=application%2Fpdf%3Bcharset%3DUTF-8&blobheadername1=Cache-Control&blobheadername2=Expires&blobheadername3=Site&blobheadervalue1=no-store%2Cno-cache%2Cmust-revalidate&blobheadervalue2=0&blobheadervalue3=Portal_Informador&blobnocache=true"
+        ><img alt="grant" src="/grant.webp" />
+      </a>
+    </section>
   </main>
 </Base>
 
@@ -164,7 +173,7 @@ const groupedStacks = groupList(stacks, 4)
       }
     }
 
-    section.protecom {
+    section.grant {
       width: 100%;
 
       margin: 3rem 0;
@@ -172,10 +181,12 @@ const groupedStacks = groupList(stacks, 4)
       max-width: max-content;
       text-align: center;
 
+      background-color: white;
+
       a {
         img {
           width: 100%;
-          max-width: 20rem;
+          max-width: 32rem;
 
           margin: 0.5rem 0;
 
