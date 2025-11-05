@@ -1,0 +1,32 @@
+{
+  "nav": {
+    "home": "Home",
+    "blog": "Blog"
+  },
+  "meta": {
+    "title": "Marco De Bortoli",
+    "description": "Marco De Bortoli - Software Engineer"
+  },
+  "sections": {
+    "contact": "Contact",
+    "stacks": "Stacks"
+  },
+  "links": {
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "telegram": "Telegram",
+    "discord": "Discord"
+  },
+  "stacks": {
+    "javascript": "JavaScript",
+    "typescript": "TypeScript",
+    "python": "Python",
+    "go": "Go",
+    "postgresql": "PostgreSQL",
+    "mongodb": "MongoDB",
+    "redis": "Redis",
+    "dynamodb": "DynamoDB",
+    "vercel": "Vercel",
+    "aws": "AWS"
+  }
+}

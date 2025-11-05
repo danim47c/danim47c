@@ -1,7 +1,7 @@
 ---
+import { t } from "i18next";
 import Svg from "../components/Svg.astro";
 import Base from "../layouts/base.astro";
-import { groupList } from "../utils/group";
 
 interface Link {
   name: string;
@@ -12,32 +12,30 @@ interface Link {
 
 const links: Link[] = [
   {
-    name: "GitHub",
+    name: t("links.github"),
     icon: "./assets/links/github.svg",
     url: "https://github.com/danim47c",
     color: "#212121",
   },
   {
-    name: "Linkedin",
+    name: t("links.linkedin"),
     icon: "./assets/links/linkedin.svg",
     url: "https://linkedin.com/in/danim47c",
     color: "#0B63BC",
   },
   {
-    name: "Telegram",
+    name: t("links.telegram"),
     icon: "./assets/links/telegram.svg",
     url: "https://t.me/danim47c",
     color: "#249CD7",
   },
   {
-    name: "Discord",
+    name: t("links.discord"),
     icon: "./assets/links/discord.svg",
     url: "https://discordapp.com/users/495957564706521090",
     color: "#7085D3",
   },
 ];
-
-const groupedLinks = groupList(links, 2);
 
 interface Stack {
   name: string;
@@ -47,259 +45,202 @@ interface Stack {
 
 const stacks: Stack[] = [
   {
-    name: "Javascript",
+    name: t("stacks.javascript"),
     icon: "./assets/stacks/javascript.svg",
     color: "#F7DF1C",
   },
   {
-    name: "Typescript",
+    name: t("stacks.typescript"),
     icon: "./assets/stacks/typescript.svg",
     color: "#007ACC",
   },
-  { name: "Python", icon: "./assets/stacks/python.svg", color: "#FED546" },
-  { name: "Go", icon: "./assets/stacks/go.svg", color: "#6AD6E5" },
+  { name: t("stacks.python"), icon: "./assets/stacks/python.svg", color: "#FED546" },
+  { name: t("stacks.go"), icon: "./assets/stacks/go.svg", color: "#6AD6E5" },
   {
-    name: "PostgreSQL",
+    name: t("stacks.postgresql"),
     icon: "./assets/stacks/postgresql.svg",
     color: "#336790",
   },
-  { name: "MongoDB", icon: "./assets/stacks/mongodb.svg", color: "#6CAB47" },
-  { name: "Redis", icon: "./assets/stacks/redis.svg", color: "#C52F2C" },
-  { name: "DynamoDB", icon: "./assets/stacks/dynamodb.svg", color: "#2D71B8" },
-  { name: "Vercel", icon: "./assets/stacks/vercel.svg", color: "#000" },
-  { name: "AWS", icon: "./assets/stacks/aws.svg", color: "#FF9900" },
+  { name: t("stacks.mongodb"), icon: "./assets/stacks/mongodb.svg", color: "#6CAB47" },
+  { name: t("stacks.redis"), icon: "./assets/stacks/redis.svg", color: "#C52F2C" },
+  { name: t("stacks.dynamodb"), icon: "./assets/stacks/dynamodb.svg", color: "#2D71B8" },
+  { name: t("stacks.vercel"), icon: "./assets/stacks/vercel.svg", color: "#000" },
+  { name: t("stacks.aws"), icon: "./assets/stacks/aws.svg", color: "#FF9900" },
 ];
-
-const groupedStacks = groupList(stacks, 4);
 ---
 
 <Base>
-  <main>
-    <section class="profile">
-      <img alt="profile photo" src="/profile.webp" />
+  <section class="profile">
+    <img alt="profile photo" src="/profile.webp" />
 
-      <div>
-        <h2>Daniel Mateos</h2>
+    <div>
+      <h2>Marco De Bortoli</h2>
+      <h3>Software Engineer</h3>
+    </div>
+  </section>
 
-        <h3>FullStack Developer</h3>
-      </div>
-    </section>
+  <section class="links">
+    <h4>{t("sections.contact")}</h4>
+    <div class="links-grid">
+      {
+        links.map((link) => (
+          <a
+            target="_blank"
+            href={link.url}
+            style={`border-color: ${link.color}`}
+            rel="noreferrer"
+            aria-label={link.name}
+          >
+            <Svg src={link.icon} />
+          </a>
+        ))
+      }
+    </div>
+  </section>
 
-    <section class="links">
-      <h4>Contact</h4>
-      <div>
-        {
-          groupedLinks.map((group) => (
-            <div>
-              {group.map((link) => (
-                <a
-                  target="_blank"
-                  href={link.url}
-                  style={`color: ${link.color}`}
-                  rel="noreferrer"
-                >
-                  <Svg src={link.icon} />
-                </a>
-              ))}
-            </div>
-          ))
-        }
-      </div>
-    </section>
+  <section class="stacks">
+    <h4>{t("sections.stacks")}</h4>
 
-    <section class="stacks">
-      <h4>Stacks</h4>
+    <div class="stacks-grid">
+      {
+        stacks.map((stack) => (
+          <div style={`border-color: ${stack.color}`} title={stack.name}>
+            <Svg src={stack.icon} />
+          </div>
+        ))
+      }
+    </div>
+  </section>
 
-      <div>
-        {
-          groupedStacks.map((group) => (
-            <div>
-              {group.map((link) => (
-                <div style={`color: ${link.color}`}>
-                  <Svg src={link.icon} />
-                </div>
-              ))}
-            </div>
-          ))
-        }
-      </div>
-    </section>
-
-    <section class="grant">
-      <a
-        target="_blank"
-        rel="noreferrer"
-        href="https://www.tramitacastillayleon.jcyl.es/web/jcyl/binarios/853/306/IAPA_2884_Cartel_2024.pdf?blobheader=application%2Fpdf%3Bcharset%3DUTF-8&blobheadername1=Cache-Control&blobheadername2=Expires&blobheadername3=Site&blobheadervalue1=no-store%2Cno-cache%2Cmust-revalidate&blobheadervalue2=0&blobheadervalue3=Portal_Informador&blobnocache=true"
-        ><img alt="grant" src="/grant.webp" />
-      </a>
-    </section>
-  </main>
+  <section class="grant">
+    <a
+      target="_blank"
+      rel="noreferrer"
+      href="https://www.tramitacastillayleon.jcyl.es/web/jcyl/binarios/853/306/IAPA_2884_Cartel_2024.pdf?blobheader=application%2Fpdf%3Bcharset%3DUTF-8&blobheadername1=Cache-Control&blobheadername2=Expires&blobheadername3=Site&blobheadervalue1=no-store%2Cno-cache%2Cmust-revalidate&blobheadervalue2=0&blobheadervalue3=Portal_Informador&blobnocache=true"
+      ><img alt="grant" src="/grant.webp" />
+    </a>
+  </section>
 </Base>
 
 <style lang="scss">
-  main {
+  section {
+    margin: 3rem auto;
+    text-align: center;
+
+    h4 {
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+  }
+
+  .profile {
+    margin: 2rem auto 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 2rem;
 
-    section.profile {
-      margin: 4rem 0;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      row-gap: 3rem;
-
-      img {
-        width: 15rem;
-        height: 15rem;
-
-        border-radius: 10%;
-      }
-
-      div {
-        h2 {
-          font-size: 2em;
-          font-weight: 700;
-          margin-bottom: 0.5rem;
-        }
-
-        h3 {
-          font-size: 1.2em;
-          font-weight: 300;
-
-          text-align: center;
-        }
-      }
+    img {
+      width: 10rem;
+      height: 10rem;
+      border-radius: 50%;
+      object-fit: cover;
     }
 
-    section.grant {
-      width: 100%;
+    div {
+      h2 {
+        font-size: 1.75rem;
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+      }
 
-      margin: 3rem 0;
-      padding: 0 4rem;
-      max-width: max-content;
-      text-align: center;
+      h3 {
+        font-size: 1rem;
+        font-weight: 300;
+        opacity: 0.7;
+      }
+    }
+  }
 
-      background-color: white;
+  .links {
+    max-width: 600px;
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(3.5rem, 1fr));
+      gap: 1.5rem;
+      justify-items: center;
 
       a {
-        img {
-          width: 100%;
-          max-width: 32rem;
-
-          margin: 0.5rem 0;
-
-          border: 0.05rem solid var(--color-secondary);
-          border-radius: 0.5rem;
-
-          box-shadow: 0 0 10px -5px var(--color-secondary);
-
-          transition: box-shadow ease-out 0.1s;
-
-          &:hover {
-            box-shadow: 0 0 10px -4px currentColor;
-          }
-        }
-      }
-    }
-
-    section.links {
-      margin: 3rem 0;
-
-      h4 {
-        font-size: 1.5em;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        text-align: center;
-      }
-
-      & > div {
-        margin: 2rem;
-
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        row-gap: 2rem;
-        column-gap: 2rem;
-
-        & > div {
-          display: flex;
-          flex-wrap: wrap;
-          row-gap: 2rem;
-          column-gap: 2rem;
-
-          a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            padding: 0.5rem;
-            border: 0.15rem solid currentColor;
-            border-radius: 10%;
-
-            transition: box-shadow ease-out 0.1s;
-
-            box-shadow: 0 0 10px -5px currentColor;
-
-            width: 3rem;
-            height: 3rem;
-
-            &:hover {
-              box-shadow: 0 0 10px -2px currentColor;
-            }
-          }
-        }
-      }
-    }
-
-    section.stacks {
-      margin: 3rem 0;
-
-      h4 {
-        font-size: 1.5em;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        text-align: center;
-      }
-
-      & > div {
-        margin-top: 2rem;
-
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        row-gap: 1rem;
-        column-gap: 1rem;
+        width: 3.5rem;
+        height: 3.5rem;
+        padding: 0.75rem;
+        border: 1px solid;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        background: transparent;
 
-        & > div {
-          display: flex;
-          flex-wrap: wrap;
-          row-gap: 1rem;
-          column-gap: 1rem;
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
 
-          div {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+  .stacks {
+    max-width: 800px;
 
-            padding: 0.4rem;
-            border: 0.15rem solid currentColor;
-            border-radius: 10%;
+    .stacks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
+      gap: 1.25rem;
+      justify-items: center;
 
-            transition: box-shadow ease-out 0.1s;
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        padding: 0.625rem;
+        border: 1px solid;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        background: transparent;
 
-            box-shadow: 0 0 10px -5px currentColor;
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
 
-            width: 2.5rem;
-            height: 2.5rem;
+  .grant {
+    max-width: 100%;
+    padding: 0 1rem;
 
-            &:hover {
-              box-shadow: 0 0 10px -2px currentColor;
-            }
-          }
+    a {
+      display: inline-block;
+
+      img {
+        width: 100%;
+        max-width: 28rem;
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        transition: all 0.2s ease;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
         }
       }
     }

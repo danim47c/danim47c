@@ -1,9 +1,78 @@
 ---
+import i18next, { t, changeLanguage } from "i18next";
+
 interface Props {
   title?: string
 }
 
-const { title = "danim47c" } = Astro.props
+// Initialize i18next if not already initialized
+if (!i18next.isInitialized) {
+  await i18next.init({
+    lng: "en",
+    resources: {
+      en: {
+        translation: {
+          nav: { home: "Home", blog: "Blog" },
+          meta: {
+            title: "Marco De Bortoli",
+            description: "Marco De Bortoli - Software Engineer"
+          },
+          sections: { contact: "Contact", stacks: "Stacks" },
+          links: {
+            github: "GitHub",
+            linkedin: "LinkedIn",
+            telegram: "Telegram",
+            discord: "Discord"
+          },
+          stacks: {
+            javascript: "JavaScript",
+            typescript: "TypeScript",
+            python: "Python",
+            go: "Go",
+            postgresql: "PostgreSQL",
+            mongodb: "MongoDB",
+            redis: "Redis",
+            dynamodb: "DynamoDB",
+            vercel: "Vercel",
+            aws: "AWS"
+          }
+        }
+      },
+      es: {
+        translation: {
+          nav: { home: "Inicio", blog: "Blog" },
+          meta: {
+            title: "Marco De Bortoli",
+            description: "Marco De Bortoli - Ingeniero de Software"
+          },
+          sections: { contact: "Contacto", stacks: "Tecnologías" },
+          links: {
+            github: "GitHub",
+            linkedin: "LinkedIn",
+            telegram: "Telegram",
+            discord: "Discord"
+          },
+          stacks: {
+            javascript: "JavaScript",
+            typescript: "TypeScript",
+            python: "Python",
+            go: "Go",
+            postgresql: "PostgreSQL",
+            mongodb: "MongoDB",
+            redis: "Redis",
+            dynamodb: "DynamoDB",
+            vercel: "Vercel",
+            aws: "AWS"
+          }
+        }
+      }
+    }
+  });
+}
+
+changeLanguage("en");
+
+const { title = "Marco De Bortoli" } = Astro.props
 
 interface HeaderLink {
   href: string
@@ -12,150 +81,135 @@ interface HeaderLink {
 }
 
 const headerLinks: HeaderLink[] = [
-  { text: "Home", href: "/" },
-  { text: "Blog", href: "https://dev.to/danim47c", external: true },
+  { text: t("nav.home"), href: "/" },
+  { text: t("nav.blog"), href: "https://dev.to/danim47c", external: true },
 ]
 ---
 
 <html lang="en">
-  <script is:inline>
-    const offsetToMinize = 100
+  <head>
+    <title>{title}</title>
 
-    let header
-    document.addEventListener("scroll", () => {
-      if (!header) {
-        header = document.querySelector("header")
-      }
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="title" content={t("meta.title")} />
+    <meta
+      name="description"
+      content={t("meta.description")}
+    />
 
-      if (window.scrollY > offsetToMinize) {
-        if (header.classList.contains("maximized")) {
-          header.classList.replace("maximized", "minimized")
-        }
-      } else {
-        if (window.scrollY <= 0) {
-          header.classList.replace("minimized", "maximized")
-        }
-      }
-    })
-  </script>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:url" content="https://danim47c.dev/" />
+    <meta property="og:title" content={t("meta.title")} />
+    <meta
+      property="og:description"
+      content={t("meta.description")}
+    />
+    <meta property="og:image" content="/profile.webp" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://danim47c.dev/" />
+    <meta property="twitter:title" content={t("meta.title")} />
+    <meta
+      property="twitter:description"
+      content={t("meta.description")}
+    />
+    <meta property="twitter:image" content="/profile.webp" />
 
-  <title>{title}</title>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta charset="utf-8" />
-  <meta name="title" content="danim47c" />
-  <meta
-    name="description"
-    content="Daniel Mateos Carballares - Desarollador Fullstack"
-  />
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:url" content="https://danim47c.dev/" />
-  <meta property="og:title" content="danim47c" />
-  <meta
-    property="og:description"
-    content="Daniel Mateos Carballares - Desarollador Fullstack"
-  />
-  <meta property="og:image" content="/profile.webp" />
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://danim47c.dev/" />
-  <meta property="twitter:title" content="danim47c" />
-  <meta
-    property="twitter:description"
-    content="Daniel Mateos Carballares - Desarollador Fullstack"
-  />
-  <meta property="twitter:image" content="/profile.webp" />
-
-  <link
-    rel="apple-touch-icon"
-    sizes="57x57"
-    href="/icons/apple-icon-57x57.png"
-  />
-  <link
-    rel="apple-touch-icon"
-    sizes="60x60"
-    href="/icons/apple-icon-60x60.png"
-  />
-  <link
-    rel="apple-touch-icon"
-    sizes="72x72"
-    href="/icons/apple-icon-72x72.png"
-  />
-  <link
-    rel="apple-touch-icon"
-    sizes="76x76"
-    href="/icons/apple-icon-76x76.png"
-  />
-  <link
-    rel="apple-touch-icon"
-    sizes="114x114"
-    href="/icons/apple-icon-114x114.png"
-  />
-  <link
-    rel="apple-touch-icon"
-    sizes="120x120"
-    href="/icons/apple-icon-120x120.png"
-  />
-  <link
-    rel="apple-touch-icon"
-    sizes="144x144"
-    href="/icons/apple-icon-144x144.png"
-  />
-  <link
-    rel="apple-touch-icon"
-    sizes="152x152"
-    href="/icons/apple-icon-152x152.png"
-  />
-  <link
-    rel="apple-touch-icon"
-    sizes="180x180"
-    href="/icons/apple-icon-180x180.png"
-  />
-  <link
-    rel="icon"
-    type="image/png"
-    sizes="192x192"
-    href="/icons/android-icon-192x192.png"
-  />
-  <link
-    rel="icon"
-    type="image/png"
-    sizes="32x32"
-    href="/icons/favicon-32x32.png"
-  />
-  <link
-    rel="icon"
-    type="image/png"
-    sizes="96x96"
-    href="/icons/favicon-96x96.png"
-  />
-  <link
-    rel="icon"
-    type="image/png"
-    sizes="16x16"
-    href="/icons/favicon-16x16.png"
-  />
-  <link rel="manifest" href="/manifest.json" />
-  <meta name="msapplication-TileColor" content="#ffffff" />
-  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-  <meta name="theme-color" content="#ffffff" />
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="/icons/apple-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="/icons/apple-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="/icons/apple-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="/icons/apple-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="/icons/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="/icons/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="/icons/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="/icons/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/icons/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/icons/android-icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="/icons/favicon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/icons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+    <meta name="theme-color" content="#ffffff" />
+  </head>
 
   <body>
-    <header class="maximized">
-      <h1>danim47c</h1>
+    <header>
+      <h1>Marco De Bortoli</h1>
 
-      <ul>
-        {
-          headerLinks.map(({ text, href, external }) => (
-            <li>
-              <a target={external ? "_blank" : undefined} href={href} rel="noreferrer">{text}</a>
-            </li>
-          ))
-        }
-      </ul>
+      <nav>
+        <ul>
+          {
+            headerLinks.map(({ text, href, external }) => (
+              <li>
+                <a target={external ? "_blank" : undefined} href={href} rel="noreferrer">{text}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
     </header>
 
-    <slot />
+    <main>
+      <slot />
+    </main>
     <style is:global>
       @font-face {
         font-family: SourceSansPro;
@@ -179,6 +233,8 @@ const headerLinks: HeaderLink[] = [
       :root {
         --color-primary: #fcfcfc;
         --color-secondary: #1a1a1a;
+        --color-border: #e5e5e5;
+        --color-accent: #0066cc;
       }
 
       * {
@@ -193,62 +249,53 @@ const headerLinks: HeaderLink[] = [
 
       html {
         background-color: var(--color-primary);
+      }
 
-        scroll-behavior: smooth;
+      body {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
       }
     </style>
 
     <style lang="scss">
       header {
-        position: sticky;
-        top: 0;
-
-        background-color: var(--color-primary);
-
+        padding: 3rem 0 2rem;
         margin-bottom: 3rem;
-        padding: 2rem 0;
+        border-bottom: 1px solid var(--color-border);
 
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        column-gap: 2rem;
-        row-gap: 1.5rem;
-        flex-wrap: wrap;
-
-        transition: all ease-out 400ms;
+        gap: 1.5rem;
 
         h1 {
-          padding: 0 0.5rem;
-
           font-weight: 300;
-          font-size: 3em;
+          font-size: 2.5rem;
+          letter-spacing: -0.02em;
         }
 
-        ul {
-          padding: 0 0.5rem;
-
+        nav ul {
           display: flex;
-          column-gap: 1rem;
-          align-items: center;
-          justify-content: center;
-
+          gap: 2rem;
           list-style: none;
 
           a {
-            font-size: 1.1em;
-
+            font-size: 1rem;
             text-decoration: none;
+            color: var(--color-secondary);
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+
+            &:hover {
+              opacity: 1;
+            }
           }
         }
+      }
 
-        &.minimized {
-          padding: 1rem 0;
-
-          flex-direction: row;
-          column-gap: 5rem;
-          row-gap: 0.5rem;
-        }
+      main {
+        padding-bottom: 4rem;
       }
     </style>
   </body>
