@@ -13,6 +13,8 @@
   "dependencies": {
     "@astrojs/cloudflare": "^10.2.6",
     "astro": "^4.8.3",
+    "astro-i18next": "^1.0.0-beta.21",
+    "i18next": "^25.6.0",
     "sass": "^1.77.1",
     "typescript": "^5.4.5"
   },
