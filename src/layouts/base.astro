@@ -1,42 +1,42 @@
 ---
 interface Props {
-  title?: string
+  title?: string;
 }
 
-const { title = "danim47c" } = Astro.props
+const { title = "danim47c" } = Astro.props;
 
 interface HeaderLink {
-  href: string
-  text: string
-  external?: boolean
+  href: string;
+  text: string;
+  external?: boolean;
 }
 
 const headerLinks: HeaderLink[] = [
   { text: "Home", href: "/" },
   { text: "Blog", href: "https://dev.to/danim47c", external: true },
-]
+];
 ---
 
 <html lang="en">
   <script is:inline>
-    const offsetToMinize = 100
+    const offsetToMinize = 100;
 
-    let header
+    let header;
     document.addEventListener("scroll", () => {
       if (!header) {
-        header = document.querySelector("header")
+        header = document.querySelector("header");
       }
 
       if (window.scrollY > offsetToMinize) {
         if (header.classList.contains("maximized")) {
-          header.classList.replace("maximized", "minimized")
+          header.classList.replace("maximized", "minimized");
         }
       } else {
         if (window.scrollY <= 0) {
-          header.classList.replace("minimized", "maximized")
+          header.classList.replace("minimized", "maximized");
         }
       }
-    })
+    });
   </script>
 
   <title>{title}</title>
@@ -140,6 +140,31 @@ const headerLinks: HeaderLink[] = [
   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
   <meta name="theme-color" content="#ffffff" />
 
+  <script is:inline>
+    (function (ss, ex) {
+      window.ldfdr =
+        window.ldfdr ||
+        function () {
+          (ldfdr._q = ldfdr._q || []).push([].slice.call(arguments));
+        };
+      (function (d, s) {
+        fs = d.getElementsByTagName(s)[0];
+        function ce(src) {
+          var cs = d.createElement(s);
+          cs.src = src;
+          cs.async = 1;
+          fs.parentNode.insertBefore(cs, fs);
+        }
+        ce(
+          "https://sc.lfeeder.com/lftracker_v1_" +
+            ss +
+            (ex ? "_" + ex : "") +
+            ".js",
+        );
+      })(document, "script");
+    })("YEgkB8lbMjv4ep3Z");
+  </script>
+
   <body>
     <header class="maximized">
       <h1>danim47c</h1>
@@ -148,7 +173,13 @@ const headerLinks: HeaderLink[] = [
         {
           headerLinks.map(({ text, href, external }) => (
             <li>
-              <a target={external ? "_blank" : undefined} href={href} rel="noreferrer">{text}</a>
+              <a
+                target={external ? "_blank" : undefined}
+                href={href}
+                rel="noreferrer"
+              >
+                {text}
+              </a>
             </li>
           ))
         }
