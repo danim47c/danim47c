@@ -1,8 +1,12 @@
 ---
+import { getLangFromUrl, t, type Language } from '../i18n'
+
 interface Props {
   title?: string
+  lang?: Language
 }
 
+const lang = Astro.props.lang || getLangFromUrl(Astro.url)
 const { title = "danim47c" } = Astro.props
 
 interface HeaderLink {
@@ -12,33 +16,12 @@ interface HeaderLink {
 }
 
 const headerLinks: HeaderLink[] = [
-  { text: "Home", href: "/" },
-  { text: "Blog", href: "https://dev.to/danim47c", external: true },
+  { text: t(lang, 'nav.home'), href: "/" },
+  { text: t(lang, 'nav.blog'), href: "https://dev.to/danim47c", external: true },
 ]
 ---
 
-<html lang="en">
-  <script is:inline>
-    const offsetToMinize = 100
-
-    let header
-    document.addEventListener("scroll", () => {
-      if (!header) {
-        header = document.querySelector("header")
-      }
-
-      if (window.scrollY > offsetToMinize) {
-        if (header.classList.contains("maximized")) {
-          header.classList.replace("maximized", "minimized")
-        }
-      } else {
-        if (window.scrollY <= 0) {
-          header.classList.replace("minimized", "maximized")
-        }
-      }
-    })
-  </script>
-
+<html lang={lang}>
   <title>{title}</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,7 +29,7 @@ const headerLinks: HeaderLink[] = [
   <meta name="title" content="danim47c" />
   <meta
     name="description"
-    content="Daniel Mateos Carballares - Desarollador Fullstack"
+    content={t(lang, 'meta.description')}
   />
 
   <!-- Open Graph / Facebook -->
@@ -54,7 +37,7 @@ const headerLinks: HeaderLink[] = [
   <meta property="og:title" content="danim47c" />
   <meta
     property="og:description"
-    content="Daniel Mateos Carballares - Desarollador Fullstack"
+    content={t(lang, 'meta.description')}
   />
   <meta property="og:image" content="/profile.webp" />
   <meta property="twitter:card" content="summary_large_image" />
@@ -62,7 +45,7 @@ const headerLinks: HeaderLink[] = [
   <meta property="twitter:title" content="danim47c" />
   <meta
     property="twitter:description"
-    content="Daniel Mateos Carballares - Desarollador Fullstack"
+    content={t(lang, 'meta.description')}
   />
   <meta property="twitter:image" content="/profile.webp" />
 
@@ -141,18 +124,20 @@ const headerLinks: HeaderLink[] = [
   <meta name="theme-color" content="#ffffff" />
 
   <body>
-    <header class="maximized">
+    <header>
       <h1>danim47c</h1>
 
-      <ul>
-        {
-          headerLinks.map(({ text, href, external }) => (
-            <li>
-              <a target={external ? "_blank" : undefined} href={href} rel="noreferrer">{text}</a>
-            </li>
-          ))
-        }
-      </ul>
+      <nav>
+        <ul>
+          {
+            headerLinks.map(({ text, href, external }) => (
+              <li>
+                <a target={external ? "_blank" : undefined} href={href} rel="noreferrer">{text}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
     </header>
 
     <slot />
@@ -177,7 +162,7 @@ const headerLinks: HeaderLink[] = [
       }
 
       :root {
-        --color-primary: #fcfcfc;
+        --color-primary: #fafafa;
         --color-secondary: #1a1a1a;
       }
 
@@ -185,69 +170,82 @@ const headerLinks: HeaderLink[] = [
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-
-        font-family: SourceSansPro, Arial, Helvetica, sans-serif;
-
-        color: var(--color-secondary);
       }
 
       html {
         background-color: var(--color-primary);
-
         scroll-behavior: smooth;
+        font-family: SourceSansPro, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+        color: var(--color-secondary);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        min-height: 100vh;
       }
     </style>
 
     <style lang="scss">
       header {
-        position: sticky;
-        top: 0;
-
-        background-color: var(--color-primary);
-
-        margin-bottom: 3rem;
-        padding: 2rem 0;
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
 
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
-        justify-content: center;
-        column-gap: 2rem;
-        row-gap: 1.5rem;
+        justify-content: space-between;
+        gap: 2rem;
         flex-wrap: wrap;
 
-        transition: all ease-out 400ms;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
 
         h1 {
-          padding: 0 0.5rem;
-
           font-weight: 300;
-          font-size: 3em;
+          font-size: 2em;
+          letter-spacing: 0.05em;
         }
 
-        ul {
-          padding: 0 0.5rem;
-
+        nav ul {
           display: flex;
-          column-gap: 1rem;
+          gap: 2rem;
           align-items: center;
-          justify-content: center;
-
           list-style: none;
 
           a {
-            font-size: 1.1em;
-
+            font-size: 1em;
+            font-weight: 400;
             text-decoration: none;
+            position: relative;
+            transition: opacity 0.2s ease;
+
+            &:hover {
+              opacity: 0.6;
+            }
+
+            &::after {
+              content: '';
+              position: absolute;
+              bottom: -4px;
+              left: 0;
+              width: 0;
+              height: 1px;
+              background-color: var(--color-secondary);
+              transition: width 0.3s ease;
+            }
+
+            &:hover::after {
+              width: 100%;
+            }
           }
         }
 
-        &.minimized {
-          padding: 1rem 0;
-
-          flex-direction: row;
-          column-gap: 5rem;
-          row-gap: 0.5rem;
+        @media (max-width: 768px) {
+          flex-direction: column;
+          text-align: center;
         }
       }
     </style>
